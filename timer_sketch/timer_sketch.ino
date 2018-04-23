@@ -1,10 +1,11 @@
-/* 
+/*
   timer_sketch
-  
+
   Test arduino's capability to trigger an event once each 10th of a second
   for 5 seconds, then pause for 15 seconds (on loop).
   modified 4 Feb 2017
-  by Nick Taras 
+  by Nick Taras
+  
 */
 
 //Library: http://playground.arduino.cc/Code/Timer
@@ -19,12 +20,13 @@ int inactiveInterval = 15000;      // in milliseconds
 int applicationClockSpeed = 100;   // in milliseconds
 
 // Main Application State Machine:
-// "ACTIVE"   : commuication with hardware is permitted.
-// "INACTIVE" : commuication with hardware is not permitted.
-String state = "ACTIVE"; 
+// "ACTIVE"   : communication with hardware is permitted.
+// "INACTIVE" : commuincation with hardware is not permitted.
+String state = "ACTIVE";
 
 // High pressure Filter hardware State Machine:
 String hpfState  = "ON";      // high pressure filter turn on/off
+
 //TODO easier way to toggle power when using actual pins on the board
 //t.oscillate(13, 50, HIGH);
 
@@ -43,7 +45,7 @@ void inactiveStateUpdate() {
   state = "INACTIVE";
 }
 
-// Update application 
+// Update application
 void appUpdate() {
   hpfUpdate();
 }
@@ -76,9 +78,9 @@ void loop() {
   t.every(inactiveInterval + activeInterval, activeStateUpdate);
 
   appUpdate();
-  
+
   delay(applicationClockSpeed);
-  
+
   t.update();
-  
+
 }
